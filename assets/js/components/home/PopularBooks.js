@@ -12,7 +12,7 @@ export default class PopularBooks extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/books')
+    axios.get('/api/books?maxResults=10')
       .then((res) => {
         this.setState({ books: res.data });
       });

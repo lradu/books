@@ -1,5 +1,3 @@
-from random import randint
-
 from django.db.models import Count
 from django.shortcuts import render
 from django.views.generic import View
@@ -16,8 +14,14 @@ class HomeView(View):
     return render(request, self.template_name, {})
 
 class BooksAPIView(ListAPIView):
-  queryset = Book.objects.all()[:10]
   serializer_class = BookSerializer
+
+  def get_queryset(self):
+        queryset = Book.objects.all()
+        maxResults = self.request.query_params.get('maxResults', None)
+        if maxResults is not None:
+            queryset = queryset[:int(maxResults)]
+        return queryset
 
 class RecommendedBookAPIView(RetrieveAPIView):
   queryset = Book.objects.all()[0]
