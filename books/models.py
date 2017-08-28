@@ -73,4 +73,4 @@ def update_book_rating(sender, instance, **kwargs):
       book.rating = rating['rating__avg']
       book.save()
   except:
-    pass 
+    pass

@@ -2,6 +2,7 @@ from datetime import date
 
 from django.db.models import Avg, Count
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import View
 
 from rest_framework.generics import ListAPIView
@@ -44,3 +45,9 @@ class RecommendedBook(APIView):
 class Authors(ListAPIView):
   queryset = Author.objects.all()
   serializer_class = AuthorSerializer
+
+class Upcoming(ListAPIView):
+  time = timezone.now()
+
+  queryset = Book.objects.filter(publish_date__gt=time)
+  serializer_class = BookSerializer

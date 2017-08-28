@@ -5,6 +5,7 @@ import TopMenu from '../Menu';
 import PopularBooks from './PopularBooks';
 import PopularAuthors from './PopularAuthors';
 import RecommendedBook from './RecommendedBook';
+import Upcoming from './Upcoming';
 
 export default class Layout extends React.Component {
   render() {
@@ -67,6 +68,7 @@ export default class Layout extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={8}>
                   <Divider horizontal>Upcoming Books</Divider>
+                  <Upcoming />
                 </Grid.Column>
               </Grid>
             </Grid.Row>
