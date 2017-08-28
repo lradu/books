@@ -6,6 +6,7 @@ import PopularBooks from './PopularBooks';
 import PopularAuthors from './PopularAuthors';
 import RecommendedBook from './RecommendedBook';
 import Upcoming from './Upcoming';
+import Giveaways from './Giveaways';
 
 export default class Layout extends React.Component {
   render() {
@@ -65,6 +66,7 @@ export default class Layout extends React.Component {
               <Grid relaxed columns={2} stackable>
                 <Grid.Column width={8}>
                   <Divider horizontal>Giveaways</Divider>
+                  <Giveaways />
                 </Grid.Column>
                 <Grid.Column width={8}>
                   <Divider horizontal>Upcoming Books</Divider>

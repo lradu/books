@@ -73,4 +73,17 @@ def update_book_rating(sender, instance, **kwargs):
       book.rating = rating['rating__avg']
       book.save()
   except:
-    pass
+    pass 
+
+
+class Giveaway(models.Model):
+  user = models.ForeignKey(User, on_delete = models.CASCADE)
+  book = models.ForeignKey(Book, on_delete = models.CASCADE)
+  copies = models.PositiveIntegerField(default = 1)
+  end_date = models.DateTimeField()
+
+  class Meta:
+    ordering = ['end_date']
+  
+  def __str__(self):
+    return str(self.book)

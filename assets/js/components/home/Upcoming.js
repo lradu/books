@@ -21,7 +21,7 @@ export default class Upcoming extends React.Component {
   render() {
     const bookList = this.state.books.map((book) => 
       <Item key={book.id}>
-        <Item.Image size='tiny' src={book.cover} />
+        <Item.Image size='small' src={book.cover} />
         <Item.Content>
           <Item.Header as='a'>{book.title}</Item.Header>
           <Item.Meta>

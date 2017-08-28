@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField, StringRelatedField
 
-from .models import Author, Book, BookRating
+from .models import *
 
 class AuthorSerializer(ModelSerializer):
   books = SerializerMethodField()
@@ -62,3 +62,14 @@ class BookSerializer(ModelSerializer):
     rating = BookRating.objects.filter(book = book).count()
 
     return rating
+
+class GiveawaySerializer(ModelSerializer):
+  book = BookSerializer()
+
+  class Meta:
+    model = Giveaway
+    fields = [
+      'book',
+      'copies',
+      'end_date'
+    ]
