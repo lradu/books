@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Avg
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
@@ -57,6 +57,7 @@ class BookRating(models.Model):
   rating = models.SmallIntegerField(default = 1, validators=[validate_rating])
   book =  models.ForeignKey(Book, on_delete = models.CASCADE)
   user = models.ForeignKey(User, on_delete = models.CASCADE)
+  timestamp = models.DateTimeField(auto_now = False, auto_now_add = True)
 
   def __str__(self):
     return str(self.book)
@@ -67,5 +68,9 @@ class BookRating(models.Model):
 def update_book_rating(sender, instance, **kwargs):
   book = Book.objects.get(pk = instance.book.id)
   rating = BookRating.objects.filter(book = instance.book).aggregate(Avg('rating'))
-  book.rating = rating['rating__avg']
-  book.save() 
+  try:
+    with transaction.atomic():
+      book.rating = rating['rating__avg']
+      book.save()
+  except:
+    pass 

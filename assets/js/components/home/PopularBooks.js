@@ -27,7 +27,6 @@ export default class PopularBooks extends React.Component {
           <Item.Meta>
             <span className='cinema'>{book.genres.toString()}</span>
           </Item.Meta>
-          <Item.Description>{book.description}</Item.Description>
           <Item.Extra>
             <Rating icon='star' defaultRating={book.rating} maxRating={5} />  
              {book.rating} / {book.ratings} Ratings

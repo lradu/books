@@ -40,6 +40,7 @@ class BookSerializer(ModelSerializer):
   authors = AuthorSerializer(many=True)
   genres = StringRelatedField(many=True)
   ratings = SerializerMethodField()
+  cover = SerializerMethodField()
 
   class Meta:
     model = Book
@@ -53,6 +54,9 @@ class BookSerializer(ModelSerializer):
       'genres',
       'authors'
     ]
+  
+  def get_cover(self, book):
+    return book.cover.url
 
   def get_ratings(self, book):
     rating = BookRating.objects.filter(book = book).count()
